@@ -165,6 +165,11 @@ print(espaços)
 
 #  b) Quantos jogos possuem o sinal de exclamação na descrição (description)? Considere apenas os jogos lançados após 2010 (yearpublished).
 
+exclamação <- sum(BoardGames_Junto$description %like% "!" & BoardGames_Junto$yearpublished > 2010)
+print(exclamação)
+
+## CERTAAA
+
 #```{r}
 #exclamação <- sum(BoardGames_Junto$description %like% "!" & BoardGames_Junto$yearpublished > 2010)
 #print(exclamação)
