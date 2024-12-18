@@ -1,0 +1,524 @@
+---
+title: "Provas 1 e 2"
+format: pdf
+editor: visual
+theme: "lux"
+fontcolor: "#212121"
+---
+
+# Prova 1
+
+```{r}
+library(tidyverse)
+```
+
+
+### 1) A partir do data frame dado, responda às questões pedidas:
+
+- a) Raiz quadrada da média de eficiência;
+
+- b) Mediana dos que passaram no teste;
+
+- c) maior eficiência;
+
+- d) quais passaram no teste;
+
+- e) desvio padrão.
+
+```{r}
+#1) 
+DF1 <-data.frame(
+  Eficiência = c(36.53, 82.66, 97.48, 43.86, 54.63, 32.54, 7.47, 51.09, 58.78, 97.65),
+  Testes_Qualidade = c(FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE)
+)
+View(DF1)
+#a)
+M_Eficiência <- mean(DF1$Eficiência)
+sqrt(M_Eficiência)
+#b)
+Mediana_passaram <- by(DF1$Eficiência, DF1$Testes_Qualidade, median)
+print(Mediana_passaram)
+#c)]
+Maior_Eficiência <- by(DF1$Eficiência, DF1$Testes_Qualidade, max)
+print(Maior_Eficiência)
+#d)
+Passaram <- DF1[DF1$Eficiência >75, ]
+Passaram_Test <- nrow(Passaram)
+print(Passaram_Test)
+Manutenção <- DF1[DF1$Eficiência < 60, ]
+Precisam_Manutenção <- nrow(Manutenção)
+print(Precisam_Manutenção)
+#e)
+DesvioP <- by(DF1$Eficiência, DF1$Testes_Qualidade, sd)
+print(DesvioP)
+```
+
+### 2) Dadas as matrizes, responda o que se pede:
+
+```{r}
+Indivíduo_1 <- c(14.4, 7.3, 11.0, 8.3, 12.5, 8.1, 12.7, 11.9, 11.3, 10.5)
+Indivíduo_2 <- c(13.6, 8.9, 5.4, 14.0, 8.6, 12.0, 8.8, 7.5, 12.8, 10.7)
+Indivíduo_3 <- c(8.9, 10.4, 11.9, 13.0, 14.0, 13.8, 9.1, 5.0, 6.7, 14.6)
+Indivíduo_4 <- c(13.0, 9.7, 13.5, 11.5, 12.0, 6.7, 6.2, 14.0, 6.2, 14.5)
+Indivíduo_5 <- c(8.7, 6.2, 13.1, 8.1, 9.1, 12.3, 7.6, 6.7, 6.3, 10.5)
+
+Matrix_X_linhas <- rbind(Indivíduo_1,
+                         Indivíduo_2,
+                         Indivíduo_3,
+                         Indivíduo_4,
+                         Indivíduo_5) #Pré-tratamento
+colnames(Matrix_X_linhas) <- c("gene1", "gene2", "gene3", "gene4", "gene5", "gene6", "gene7", "gene8", "gene9", "gene10")
+
+Yndivíduo_1 <- c(9.2, 7.8, 13.5, 13.9, 8.1, 5.2, 8.8, 10.0, 8.7, 5.5)
+Yndivíduo_2 <- c(9.1, 9.6, 5.5, 8.0, 5.7, 6.3, 6.1, 7.1, 9.1, 7.1)
+Yndivíduo_3 <- c(10.6, 10.7, 8.7, 14.4, 8.9, 10.0, 9.3, 10.5, 13.2, 10.8)
+Yndivíduo_4 <- c(12.9, 6.7, 5.9, 11.3, 13.5, 6.7, 9.9, 8.9, 9.4, 6.6)
+Yndivíduo_5 <- c(10.9, 11.4, 14.4, 5.8, 12.9, 6.6, 5.6, 7.1, 14.3, 14.2)
+
+Matrix_Y_linhas <- rbind(Yndivíduo_1,
+                         Yndivíduo_2,
+                         Yndivíduo_3,
+                         Yndivíduo_4,
+                         Yndivíduo_5) #Pós-tratamento
+colnames(Matrix_Y_linhas) <- c("gene1", "gene2", "gene3", "gene4", "gene5", "gene6", "gene7", "gene8", "gene9", "gene10")
+
+#a)
+Médias_Colunas_X <- colMeans(Matrix_X_linhas)
+print(Médias_Colunas_X)
+Gen_maior <- max(Médias_Colunas_X)
+print(Gen_maior)
+
+#b)
+Trans_X <- t(Matrix_X_linhas)
+print(Trans_X)
+mult_X_T <- tcrossprod(Matrix_X_linhas)
+
+#c)
+Médias_Colunas_Y <- colMeans(Matrix_Y_linhas)
+print(Médias_Colunas_Y)
+Alterações <- Médias_Colunas_X - Médias_Colunas_Y
+print(Alterações)
+Menor_alt <- min(Alterações)
+print(Menor_alt)
+
+#e)
+Médias_Colunas_X <- colMeans(Matrix_X_linhas)
+print(Médias_Colunas_X)
+Maiores_X <- sort(Médias_Colunas_X)
+print(Maiores_X)
+Sem2 <- Matrix_X_linhas[, -2]
+Sem2_9 <- Sem2[, -9]
+Sem2_9_7 <- Sem2_9[, -7]
+Sem2_9_7_8 <- Sem2_9_7[, -8]
+Cinco_M_X <- Sem2_9_7_8[, -6]
+
+num_rows <- nrow(Cinco_M_X)
+num_cols <- ncol(Cinco_M_X)
+
+min_dim <- min(num_rows, num_cols)
+Cinco_M_X_square <- Cinco_M_X[1:min_dim, 1:min_dim]
+Det_cinco <- det(Cinco_M_X_square)
+```
+
+### 3) A partir do DF oferecido, dê o que se pede:
+
+```{r}
+DF_FastFood <- read.csv("C:/Users/anton/Downloads/archive/Datafiniti_Fast_Food_Restaurants.csv")
+#a)
+Rest_Prov <- DF_FastFood %>%
+  group_by(province) %>%
+  summarise(contagem = n()) %>%
+  arrange(desc(contagem))
+View(Rest_Prov)
+
+CA_Rest <- Rest_Prov %>%
+  filter(province == "CA") %>%
+  summarise(contagem = contagem) %>%
+  arrange(desc(contagem))
+View(CA_Rest)
+
+OH_Rest <- Rest_Prov %>%
+  filter(province == "OH") %>%
+  summarise(contagem = contagem) %>%
+  arrange(desc(contagem))
+View(OH_Rest)
+
+IA_Rest <- Rest_Prov %>%
+  filter(province == "IA") %>%
+  summarise(contagem = contagem) %>%
+  arrange(desc(contagem))
+View(IA_Rest)
+
+CA_OH_Rest <- full_join(CA_Rest, OH_Rest, by = "contagem")
+View(CA_OH_Rest)
+
+CA_OH_IA_Rest <- full_join(CA_OH_Rest, IA_Rest, by = "contagem")
+View(CA_OH_IA_Rest)
+T_CA_OH_IA_Rest <- sum(CA_OH_IA_Rest)
+View(T_CA_OH_IA_Rest)
+
+CA_OH_IA_Rest <- full_join(CA_OH_Rest, IA_Rest, by = "contagem")
+View(CA_OH_IA_Rest)
+
+#b)
+View(CA_OH_IA_Rest)
+P1201_Rest <- Rest_Prov %>%
+  filter(contagem == "1201") %>%
+  summarise(contagem = contagem) %>%
+  arrange(desc(contagem))
+View(P1201_Rest)
+
+#c)
+MaisC_Pits <- DF_FastFood %>%
+  filter(categories == "Pitas Republic")
+```
+
+# Prova 2
+
+### 1)
+
+A variância amostral (S2), o desvio médio absoluto (DMA) e o segundo coeficiente de assimetria de Pearson (AS_2) são medidas definidas, respectivamente, por:
+
+
+$$
+S2=1/n−1 ∑i=1n (xi−x¯)²
+$$
+
+
+$$
+DMA=1 n−1∑i=1n |xi−x¯|
+$$ 
+
+
+$$
+AS2=3⋅x¯−MdS
+$$
+
+em que x¯ é a média amostral, Md é a mediana e |a| corresponde ao módulo de a.
+
+Implemente uma função em R que retorne uma lista com o S2, o DMA e o AS2 de uma variável quantitativa qualquer. Considere o banco de dados airquality disponível no R, e responda o que se pede.
+
+*Resolução*:
+
+```{r}
+calculo_de_medidas <- function(x){
+  # Removendo NA's
+  x <- na.omit(x)
+  
+  # Cálculo da média
+  media <- mean(x)
+  
+  #Cálculo da mediana
+  mediana <- median(x)
+  
+  # Cálculo da variância amostral
+  variancia <- sum((x - media)^2) / (length(x) - 1)
+  
+  # Cálculo do desvio médio absoluto (DMA)
+  dma <- sum(abs(x - media)) / (length(x) - 1)
+
+  # Cálculo do coeficiente de assimetria de Pearson (AS2)
+  as2 <- 3 * (media - mediana) / sqrt(variancia)
+  
+  return((list(S2 = variancia, DMA = dma, AS2 = as2)))
+}
+
+## a) e b) S² e DMA de Temp
+calculo_de_medidas(airquality$Temp)
+
+## c) Nivel 7 de Month - Wind
+calculo_de_medidas(airquality$Month)
+Niveis <- airquality %>%
+  filter(Month == 7)
+View(Niveis)
+
+calculo_de_medidas(Niveis$Wind)
+
+## d) Para todas as variáveis do banco airquality a variância amostral é maior do que o desvio médio absoluto. (TRUE = 1/FALSE = 0)?
+lista_variaveis <- list(calculo_de_medidas(airquality$Ozone),
+calculo_de_medidas(airquality$Solar.R),
+calculo_de_medidas(airquality$Wind),
+calculo_de_medidas(airquality$Temp),
+calculo_de_medidas(airquality$Month),
+calculo_de_medidas(airquality$Day))
+View(lista_variaveis)
+
+```
+
+### 2)
+
+Considere uma matriz m×m, em que m é um inteiro positivo. Implemente uma função em R que realize a varredura de uma matriz e execute uma operação específica que depende do valor encontrado na matriz, conforme as seguintes regras:
+
+-   Se o valor for um número primo, multiplique-o por 6.
+
+-   Se o valor for um quadrado perfeito, subtraia 15. Caso o resultado obtido for negativo, eleve a 5a potência.
+
+-   Se o valor for negativo na matriz original, calcule a raiz 2ª de seu módulo.
+
+-   Para todos os outros valores, não faça nada.
+
+A função a ser criada deve retornar a matriz transformada.
+
+-   Dica: Crie funções auxiliares para verificar se um número é primo e se é um quadrado perfeito, e então implemente a função varrer_matriz que realiza a varredura da matriz conforme as regras estabelecidas.
+
+Considere: Matriz A: matrix( c(-5, -8, 4, -4, 9, -2, 6, 5, -3, -1, 3, -9, 10, 7, -6, 1) , nrow = 4, byrow = FALSE)
+
+Matriz B: matrix( c(9, -4, -18, 11, -14, 7, 2, 3, 17, 14, 0, 16, -6, -19, -8, -1, -20, 20, 5, 6) , nrow = 4, byrow = FALSE)
+
+Matriz C: matrix( c(-29, -23, -24, 21, -12, 25, 17, 16, 8, 29, 0, -5, -17, -4, -7, 14) , nrow = 4, byrow = FALSE)
+
+*Resolução*:
+
+```{r}
+# Verificar se um número é primo
+primo <- function(x) {
+  if (x <= 1) return(FALSE)
+  for (i in 2:floor(sqrt(x))) {
+    if (x %% i == 0) return(FALSE)
+  }
+  return(TRUE)
+}
+
+# Verificar se é um quadrado perfeito
+quadrado_perfeito <- function(x) {
+  if (is.na(x) || !is.numeric(x) || x < 0) {  # Verifica se x é NA, não numérico ou negativo
+    return(FALSE)
+  }
+  
+  raiz <- sqrt(x)
+  return(raiz == floor(raiz))
+}
+
+
+# Função principal para aplicar as regras
+transforma_matriz <- function(mat) {
+  apply(mat, c(1, 2), function(x) {
+    if (primo(x)) {
+      return(x * 6)
+    } else if (quadrado_perfeito(x)) {
+      resultado <- x - 15
+      if (resultado < 0) {
+        return(resultado^5)
+      }
+      return(resultado)
+    } else if (x < 0) {
+      return(abs(x)^(1/2))
+    } else {
+      return(x) # Não faz nada para outros valores
+    }
+  })
+}
+
+
+Matriz_A <- matrix( c(-5, -8, 4, -4, 9, -2, 6, 5, -3, -1, 3, -9, 10, 7, -6, 1) , nrow = 4, byrow = FALSE)
+
+Matriz_B <- matrix( c(9, -4, -18, 11, -14, 7, 2, 3, 17, 14, 0, 16, -6, -19, -8, -1, -20, 20, 5, 6) , nrow = 4, byrow = FALSE)
+
+Matriz_C <- matrix( c(-29, -23, -24, 21, -12, 25, 17, 16, 8, 29, 0, -5, -17, -4, -7, 14) , nrow = 4, byrow = FALSE)
+
+M_A_transformada <- transforma_matriz(Matriz_A)
+print(M_A_transformada)
+
+M_B_transformada <- transforma_matriz(Matriz_B)
+print(M_B_transformada)
+
+M_C_transformada <- transforma_matriz(Matriz_C)
+print(M_C_transformada)
+
+
+#a)
+soma_MA <- M_A_transformada[1,1] + M_A_transformada[2,2] + M_A_transformada[3,3] + M_A_transformada [4,4]
+print(soma_MA)
+
+#b) 
+print(M_C_transformada)
+
+#c)
+sum(M_C_transformada[,2])
+
+#d)
+primo <- function(n) {
+  if (n <= 1) return(FALSE)
+  if (n == 2) return(TRUE)
+  if (n %% 2 == 0) return(FALSE)
+  
+  
+  for (i in matrix(3, floor(sqrt(n)), by = 2)) {
+    if (n %% i == 0) return(FALSE)
+  }
+  
+  return(TRUE)
+}
+
+contar_primos <- function(i){
+  conta_primos <- 0
+  for (n in i) {
+    if (primo(n)) {
+      conta_primos <- conta_primos + 1
+    }
+  }
+  return(conta_primos)
+}
+
+i <- M_A_transformada
+iA <- contar_primos(i)
+print(iA)
+
+i <- M_B_transformada
+iB <- contar_primos(i)
+print(iB)
+
+i <- M_C_transformada
+iC <- contar_primos(i)
+print(iC)
+
+iA + iB + iC
+
+```
+
+### 3) 
+
+O *Lago Baikal*, na Rússia, é famoso por sua abundância de nutrientes e por sua beleza natural, sendo lar da espécie de peixe Omul do Baikal (Coregonus migratorius). O lago pode suportar uma capacidade máxima de 5 × 105 peixes e apresenta uma taxa de reprodução basal de 6% ao dia.
+
+Essa taxa de reprodução varia de acordo com a temperatura média da estação do ano, conforme a Tabela 1. Além disso, o pH da água afeta o comportamento dos pescadores, que pescam diferentes porcentagens de peixes por dia, conforme a Tabela 2.
+
+| Estacao | Temperatura | FatorReproducao |
+|---------|-------------|-----------------|
+| Pri     | 0           | 0.00            |
+| Ver     | 20          | 0.03            |
+| Out     | 10          | -0.03           |
+| Inv     | 0           | -0.02           |
+
+| FaixaPH | PercentualPescado |
+|---------|-------------------|
+| 6.0–6.5 | 0.12              |
+| 6.6–7.0 | 0.20              |
+| 7.1–7.5 | 0.05              |
+| 7.6–8.0 | 0.16              |
+
+No entanto, a pesca excessiva e a poluição têm afetado a população de peixes no lago. Hoje, têm-se 80 peixes no lago, e um programa de monitoramento foi implementado para avaliar o impacto dessas variáveis na população de peixes.
+
+### Sua Tarefa
+
+1.  Crie uma função chamada simular_lago que receba como entrada os seguintes parâmetros:
+
+-   dias: Número de dias do experimento.
+
+-   peixes_iniciais: Número inicial de peixes no lago.
+
+-   estacao: Estação do ano (Primavera, Verão, Outono ou Inverno).
+
+-   ph: pH médio da água durante o experimento.
+
+2.  A função deve calcular:
+
+-   O número de peixes no lago a cada dia.
+
+-   O número de dias até o lago atingir sua capacidade máxima ou o número final de peixes ao fim do período definido por dias.
+
+3.  Saída esperada:
+
+-   Um data frame com duas colunas: dias e peixes, onde dias é o número do dia e peixes é o número de peixes no lago naquele dia.
+
+### Fórmula
+
+A cada dia, o número de peixes é calculado como:
+
+Peixes no próximo dia=Peixes atuais×(1+taxa de reprodução ajustada)−peixes pescados
+
+Onde:
+
+Taxa de reprodução ajustada:
+
+Taxa basal+fator de ajuste da Tabela 1.
+
+Peixes pescados:
+
+Peixes atuais×porcentagem de peixes pescados (Tabela 2).
+
+Observação: O número de peixes nunca pode exceder a capacidade máxima do lago, e o número máximo de dias que os pesquisadores irão quantificar os peixes é 1000 dias. Além disso, contagem de peixes é sempre um número inteiro, considere sempre arredondar para cima.
+
+a)  Durante a estação Verão e com pH médio da água de 6.6–7.0, após 16 dias, quantos peixes haverá no lago?
+
+b)  Durante a estação Verão e com pH médio da água de 6.6–7.0, quantos dias são necessários para o lago atingir sua capacidade máxima?
+
+c)  Durante a estação Outono e com pH médio da água de 6.0–6.5, após 87 dias, quantos peixes haverá no lago?
+
+d)  Durante a estação Outono e com pH médio da água de 6.0–6.5, quantos dias são necessários para o lago atingir sua capacidade máxima?
+
+- **Resolução**:
+
+```{r}
+# Variáveis fixas
+taxa_basal <- 0.06
+capacidade_maxima <- 5 * 10^5
+
+fator_reproducao <- list(
+  Pri = 0.00,
+  Ver = 0.03,
+  Out = -0.03,
+  Inv = -0.02
+)
+
+percentual_pescado <- list(
+  "6.0–6.5" = 0.12,
+  "6.6–7.0" = 0.20,
+  "7.1–7.5" = 0.05,
+  "7.6–8.0" = 0.16
+)
+
+# Função principal
+simular_lago <- function(dias, peixes_iniciais, estacao, ph) {
+  # Validar os parâmetros de entrada
+  if (!(estacao %in% names(fator_reproducao))) {
+    stop("Estação inválida!")
+  }
+  if (!(ph %in% names(percentual_pescado))) {
+    stop("pH inválido!")
+  }
+  
+  taxa_reproducao_ajustada <- taxa_basal + fator_reproducao[[estacao]]
+  perc_pescado <- percentual_pescado[[ph]]
+  
+  # Inicializar a simulação
+  peixes <- peixes_iniciais
+  resultado <- data.frame(dias = integer(), peixes = integer())
+  
+  for (dia in 1:dias) {
+    # Calcular peixes pescados
+    peixes_pescados <- ceiling(peixes * perc_pescado)
+    # Calcular nova população
+    peixes <- ceiling(peixes * (1 + taxa_reproducao_ajustada) - peixes_pescados)
+    # Garantir que não ultrapasse a capacidade máxima
+    peixes <- min(peixes, capacidade_maxima)
+    # Registrar o resultado
+    resultado <- rbind(resultado, data.frame(dias = dia, peixes = peixes))
+    # Parar se atingir a capacidade máxima
+    if (peixes == capacidade_maxima) {
+      break
+    }
+  }
+  
+  return(resultado)
+}
+
+# Responder às questões
+# a) Estação: Verão, pH: 6.6–7.0, dias: 16
+resultado_a <- simular_lago(dias = 16, peixes_iniciais = 80, estacao = "Ver", ph = "6.6–7.0")
+cat("a) Após 16 dias:", tail(resultado_a$peixes, 1), "peixes\n")
+
+# b) Estação: Verão, pH: 6.6–7.0, dias até capacidade máxima
+resultado_b <- simular_lago(dias = 1000, peixes_iniciais = 80, estacao = "Ver", ph = "6.6–7.0")
+dias_b <- resultado_b[resultado_b$peixes == capacidade_maxima, "dias"]
+cat("b) Dias até capacidade máxima:", ifelse(length(dias_b) > 0, dias_b[1], "Não atingiu"), "\n")
+
+# c) Estação: Outono, pH: 6.0–6.5, dias: 87
+resultado_c <- simular_lago(dias = 87, peixes_iniciais = 80, estacao = "Out", ph = "6.0–6.5")
+cat("c) Após 87 dias:", tail(resultado_c$peixes, 1), "peixes\n")
+
+# d) Estação: Outono, pH: 6.0–6.5, dias até capacidade máxima
+resultado_d <- simular_lago(dias = 1000, peixes_iniciais = 80, estacao = "Out", ph = "6.0–6.5")
+dias_d <- resultado_d[resultado_d$peixes == capacidade_maxima, "dias"]
+cat("d) Dias até capacidade máxima:", ifelse(length(dias_d) > 0, dias_d[1], "Não atingiu"), "\n")
+```
+
