@@ -8,22 +8,33 @@ fontcolor: "#212121"
 
 # Prova 1
 
+oi
+
 ```{r}
 library(tidyverse)
 ```
 
-
 ### 1) A partir do data frame dado, responda às questões pedidas:
 
-- a) Raiz quadrada da média de eficiência;
+-   
 
-- b) Mediana dos que passaram no teste;
+    a)  Raiz quadrada da média de eficiência;
 
-- c) maior eficiência;
+-   
 
-- d) quais passaram no teste;
+    b)  Mediana dos que passaram no teste;
 
-- e) desvio padrão.
+-   
+
+    c)  maior eficiência;
+
+-   
+
+    d)  quais passaram no teste;
+
+-   
+
+    e)  desvio padrão.
 
 ```{r}
 #1) 
@@ -179,22 +190,19 @@ MaisC_Pits <- DF_FastFood %>%
 
 A variância amostral (S2), o desvio médio absoluto (DMA) e o segundo coeficiente de assimetria de Pearson (AS_2) são medidas definidas, respectivamente, por:
 
-
 $$
 S2=1/n−1 ∑i=1n (xi−x¯)²
 $$
 
-
 $$
 DMA=1 n−1∑i=1n |xi−x¯|
-$$ 
-
+$$
 
 $$
 AS2=3⋅x¯−MdS
 $$
 
-em que x¯ é a média amostral, Md é a mediana e |a| corresponde ao módulo de a.
+em que x¯ é a média amostral, Md é a mediana e \|a\| corresponde ao módulo de a.
 
 Implemente uma função em R que retorne uma lista com o S2, o DMA e o AS2 de uma variável quantitativa qualquer. Considere o banco de dados airquality disponível no R, e responda o que se pede.
 
@@ -376,7 +384,7 @@ iA + iB + iC
 
 ```
 
-### 3) 
+### 3)
 
 O *Lago Baikal*, na Rússia, é famoso por sua abundância de nutrientes e por sua beleza natural, sendo lar da espécie de peixe Omul do Baikal (Coregonus migratorius). O lago pode suportar uma capacidade máxima de 5 × 105 peixes e apresenta uma taxa de reprodução basal de 6% ao dia.
 
@@ -446,7 +454,7 @@ c)  Durante a estação Outono e com pH médio da água de 6.0–6.5, após 87 d
 
 d)  Durante a estação Outono e com pH médio da água de 6.0–6.5, quantos dias são necessários para o lago atingir sua capacidade máxima?
 
-- **Resolução**:
+-   **Resolução**:
 
 ```{r}
 # Variáveis fixas
@@ -521,4 +529,3 @@ resultado_d <- simular_lago(dias = 1000, peixes_iniciais = 80, estacao = "Out", 
 dias_d <- resultado_d[resultado_d$peixes == capacidade_maxima, "dias"]
 cat("d) Dias até capacidade máxima:", ifelse(length(dias_d) > 0, dias_d[1], "Não atingiu"), "\n")
 ```
-
