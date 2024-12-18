@@ -184,16 +184,15 @@ sem_k <- BoardGames_Junto %>%
   nrow()
 
 # d) Dentre os jogos lançados em 1996 (yearpublished), qual possui a maior quantidade de avaliações (users_rated)? Considere apenas os jogos cujo tempo máximo de jogo (maxplaytime) é 120 minutos.
+## CERTAA
+Av_1996 <- BoardGames_Junto %>%
+  filter(yearpublished == 1996 & maxplaytime == 120) %>%
+  group_by(name) %>%
+  summarize(conta = sum(users_rated, na.rm = TRUE)) %>%
+  arrange(desc(conta)) %>%
+  slice(1)
+print(Av_1996)
 
-# ```{r}
-# Av_1996 <- BoardGames_Junto %>%
-#   filter(yearpublished == 1996 & maxplaytime == 120) %>%
-#   group_by(name) %>%
-#   summarize(conta = sum(users_rated, na.rm = TRUE)) %>%
-#   arrange(desc(conta)) %>%
-#   slice(1)
-# print(Av_1996)
-# ```
 # 
 # 
 # e) Dentre os jogos lançados em 1995 (yearpublished), qual possui a maior quantidade de caracteres na descrição (description)? Considere apenas os jogos cuja idade mínima para jogar (minage) é dada por um número par.
