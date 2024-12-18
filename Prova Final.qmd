@@ -51,3 +51,21 @@ em que r
 
     Quantos quilômetros o entusiasta precisa viajar para visitar o próximo restaurante com 1 Star ?
 
+### Questão 3
+
+Considere os bancos de dados BoardGames1 e BoardGames2 para responder as questões que seguem. Os bancos apresentam uma série de informações sobre jogos de tabuleiro.
+
+Importante: Ao incluir respostas do tipo string, certifique-se de que a mesma corresponde exatamente ao que está contido nos bancos de dados. Caso contrário, o sistema vai considerar que sua resposta está incorreta.
+
+a) Dentre os jogos cujo nome (name) contém exatamente 2 palavras, quantos possuem nota média (average) maior que 7.5?
+
+b) Quantos jogos possuem o sinal de exclamação na descrição (description)? Considere apenas os jogos lançados após 2010 (yearpublished).
+Answer 2 Questão 3
+
+c) Considere os jogos que admitem no máximo 12 jogadores(as) (maxplayers) e que possuem tempo mínimo de jogo (minplaytime) superior a 70. Dentre estes, quantos não contém a letra K no nome (name)?
+Answer 3 Questão 3
+
+d) Dentre os jogos lançados em 1996 (yearpublished), qual possui a maior quantidade de avaliações (users_rated)? Considere apenas os jogos cujo tempo máximo de jogo (maxplaytime) é 120 minutos.
+Answer 4 Questão 3
+
+e) Dentre os jogos lançados em 1995 (yearpublished), qual possui a maior quantidade de caracteres na descrição (description)? Considere apenas os jogos cuja idade mínima para jogar (minage) é dada por um número par.

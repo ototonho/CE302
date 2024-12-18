@@ -36,3 +36,5 @@ DesV_Lim
 
 
 ##Questão 2
+Michelin_DF <- read.csv("/home/est/apsn24/CE302/michelin.csv")
+
