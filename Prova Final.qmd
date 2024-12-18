@@ -5,3 +5,49 @@ editor: visual
 ---
 
 ## Prova Final
+
+### Questão 1
+
+Considere as notas dos instrumentos de uma orquestra descritas no vetor numérico nomeado em Notas e os instrumentos que atingiram o limite de volume descritos no vetor lógico nomeado em LimiteVolume:
+
+#### Notas
+
+```{r}
+Notas <- data.frame(Instrumento = c("Violino", "Viola", "Violoncelo", "Contrabaixo", "Flauta", "Clarinete", "Oboé", "Trompete", "Trombone", "Percussão"),
+                    Notas = c(56, 59, 76, 38, 50, 37, 62, 93, 62, 52),
+                    Limite_Volume = c(FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE))
+```
+
+
+a) A raiz quadrada da média das notas dos instrumentos é:
+
+b) A mediana das notas dos instrumentos que atingiram o limite de volume é:
+
+c) A maior nota entre os instrumentos que não atingiram o limite de volume é:
+
+d) Considerando que instrumentos com nota entre 40 e 69 precisam de ajustes, o número de instrumentos que precisam de ajustes e atingiram o limite de volume é: 
+
+e) O desvio-padrão das notas dos instrumentos que atingiram o limite de volume é:
+
+### Questão 2
+
+Um entusiasta gastronômico está em uma jornada para explorar restaurantes listados no guia Michelin. O viajante começou sua aventura no Restaurante Per Se em New York, USA. Após saborear as delícias do restaurante, ele segue para a cidade mais próxima que abriga um restaurante reconhecido no guia Michelin.
+
+Para calcular a distância entre os restaurantes, utilizaremos a equação de Haversine, uma fórmula eficaz para medir distâncias entre pontos de latitude e longitude na superfície esférica da Terra.
+
+A equação de Haversine para calcular a distância (d) entre dois pontos na superfície de uma esfera (como a Terra) a partir das coordenadas de latitude, em radianos, (φ1, φ1) e longitude (λ1, λ2) é dada por
+
+$$
+d=2⋅rarcsin((sin2(φ2−φ12)+cosφ1⋅cosφ2⋅sin2(λ2−λ12)^(1/2))
+$$
+
+em que r
+
+é o raio da Terra (aproximadamente 6,371 km). Neste contexto, responda as questões a seguir.
+
+    Dica: Implemente a função haversine_distance para calcular a distância entre dois pontos na superfície da Terra. Verifique a necessidade de converter as coordenadas de latitude e longitude para radianos.
+
+    Utilize o banco de dados michelin.csv para obter as informações necessárias.
+
+    Quantos quilômetros o entusiasta precisa viajar para visitar o próximo restaurante com 1 Star ?
+
