@@ -60,12 +60,59 @@ Importante: Ao incluir respostas do tipo string, certifique-se de que a mesma co
 a) Dentre os jogos cujo nome (name) contém exatamente 2 palavras, quantos possuem nota média (average) maior que 7.5?
 
 b) Quantos jogos possuem o sinal de exclamação na descrição (description)? Considere apenas os jogos lançados após 2010 (yearpublished).
-Answer 2 Questão 3
+
+```{r}
+exclamação <- sum(BoardGames_Junto$description %like% "!" & BoardGames_Junto$yearpublished > 2010)
+print(exclamação)
+```
 
 c) Considere os jogos que admitem no máximo 12 jogadores(as) (maxplayers) e que possuem tempo mínimo de jogo (minplaytime) superior a 70. Dentre estes, quantos não contém a letra K no nome (name)?
-Answer 3 Questão 3
+
+```{r}
+M12_M70 <- BoardGames_Junto %>%
+  filter(maxplayers == 12 & minplaytime > 70)
+
+sem_K <- M12_M70 %>%
+  filter(name %like% "k")
+```
+
 
 d) Dentre os jogos lançados em 1996 (yearpublished), qual possui a maior quantidade de avaliações (users_rated)? Considere apenas os jogos cujo tempo máximo de jogo (maxplaytime) é 120 minutos.
-Answer 4 Questão 3
+
+```{r}
+Av_1996 <- BoardGames_Junto %>%
+  filter(yearpublished == 1996 & maxplaytime == 120) %>%
+  group_by(name) %>%
+  summarize(conta = sum(users_rated, na.rm = TRUE)) %>%
+  arrange(desc(conta)) %>%
+  slice(1)
+print(Av_1996)
+```
+
 
 e) Dentre os jogos lançados em 1995 (yearpublished), qual possui a maior quantidade de caracteres na descrição (description)? Considere apenas os jogos cuja idade mínima para jogar (minage) é dada por um número par.
+
+
+## Questão 4
+
+Feriados são épocas importantes tanto para confraternizações, descansos e para viagens. Diversos países celebram diferentes feriados e com isso, muitas pessoas aproveitam para viajar.
+
+Os dados contidos em tuesdata <- tidytuesdayR::tt_load('2024-12-24') contêm duas tabelas, uma com informações sobre feriados globais e outra sobre a quantidade de passageiros mensais em aeroportos.
+
+Nota: Caso não consiga abrir o pacote, busque no Google alternativas para fazer a leitura da base de dados, por exemplo, direto de uma url.
+
+Instruções: Não manipule o nome dos feriados, nem dos países. Considere apenas informações completas.
+
+Acerca dos dados fornecidos, responda as seguintes questões:
+
+No ano de 2012 houveram quantos feriados no(a) país Hungary?
+
+a) Em qual mês do ano de 2014 houve mais feriados no(a) país Hungary?
+
+b) Quantos passageiros (Total) foram registrados no aeroporto do(a) país Uk no mês com maior número de feriados do ano de 2013?
+
+c) Qual ano teve a maior média de passageiros do tipo International nos aeroportos do(a) país Switzerland?
+
+d) Qual país teve a maior quantidade de feriados públicos no ano de 2017?
+
+e) Qual ano teve a maior quantidade de passageiros nos aeroportos do(a) país Lithuania?

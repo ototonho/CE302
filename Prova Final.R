@@ -93,9 +93,40 @@ print(Av_1996)
 
 #e) 
 MCarac <- BoardGames_Junto %>%
-  filter(yearpublished == 1995 & maxplaytime == 120) %>%
+  filter(yearpublished == 1995 & minage %% 2) %>%
   group_by(name) %>%
   summarize(conta = sum(users_rated, na.rm = TRUE)) %>%
   arrange(desc(conta)) %>%
   slice(1)
 
+#Questão 4
+install.packages("tidytuesdayR")
+tuesdata <- tidytuesdayR::tt_load('2024-12-24')
+global_holidays <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-12-24/global_holidays.csv')
+monthly_passengers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-12-24/monthly_passengers.csv')
+
+#a) 
+class(global_holidays$Date)
+data <- as.Date(global_holidays$Date)
+ano <- format(data, "%Y")
+mes <- format(data, "%m")
+dia <- format(data, "%d")
+
+global_holidays[, ":="(ano = format(data, "%Y"), mes = ormat(data, "%m"), dia = format(data, "%d"))] 
+
+feriados14_HNG <- global_holidays %>%
+  filter(ADM_name == "Hungary") %>%
+  select(contains(2014)) %>%
+  group_by("%m") %>%
+  summarize(conta = sum(Name))
+
+feriados14_HNG
+
+
+#e) Qual país teve a maior quantidade de feriados públicos no ano de 2017?
+feri_p_2017 <- global_holidays %>%
+  filter(Type == "Public holiday") %>%
+  select(contains(2017)) %>%
+  summarize(conta = sum(ADM_name, na.rm = TRUE)) %>%
+  arrange(desc(conta))
+feri_p_2017
