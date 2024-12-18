@@ -197,6 +197,24 @@ print(Av_1996)
 # 
 # e) Dentre os jogos lançados em 1995 (yearpublished), qual possui a maior quantidade de caracteres na descrição (description)? Considere apenas os jogos cuja idade mínima para jogar (minage) é dada por um número par.
 # 
+# o chat deu que ta errada
+
+MCarac <- BoardGames_Junto %>%
+  filter(yearpublished == 1995, minage %% 2 == 0) %>%
+  mutate(description_length = str_length(description)) %>%
+  slice_max(description_length, n = 1) %>%
+  pull(name)
+
+## ironman football
+
+
+
+MCarac <- BoardGames_Junto %>%
+  filter(yearpublished == 1995 & minage %% 2) %>%
+  group_by(name) %>%
+  summarize(conta = sum(users_rated, na.rm = TRUE)) %>%
+  arrange(desc(conta)) %>%
+  slice(1)
 # 
 # ## Questão 4
 # 
