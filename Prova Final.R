@@ -36,5 +36,66 @@ DesV_Lim
 
 
 ##Questão 2
+
+##Um entusiasta gastronômico está em uma jornada para explorar restaurantes listados no guia Michelin. O viajante começou sua aventura no Restaurante Per Se em New York, USA. Após saborear as delícias do restaurante, ele segue para a cidade mais próxima que abriga um restaurante reconhecido no guia Michelin.
+
+#Para calcular a distância entre os restaurantes, utilizaremos a equação de Haversine, uma fórmula eficaz para medir distâncias entre pontos de latitude e longitude na superfície esférica da Terra.
+
+#A equação de Haversine para calcular a distância (d) entre dois pontos na superfície de uma esfera (como a Terra) a partir das coordenadas de latitude, em radianos, (φ1, φ1) e longitude (λ1, λ2) é dada por
+
 Michelin_DF <- read.csv("/home/est/apsn24/CE302/michelin.csv")
+
+#a) 
+haversine_distance 
+
+
+## Questão 3
+
+## Abrindo os dados
+BoardGames_Cat <- read.csv("/home/est/apsn24/CE302/BoardGames_Cat.csv")
+BoardGames_Num <- read.csv("/home/est/apsn24/CE302/BoardGames_Numeric.csv")
+
+BoardGames_Junto <- BoardGames_Cat %>%
+  full_join(BoardGames_Num, by = c("id" = "id"))
+
+##a) 
+espaços <- BoardGames_Junto %>%
+  filter(str_count(sp_name, "\\w+") == 2) %>%
+  summarize(conta = sum(average > 7.5))
+print(espaços)
+sum(espaços)
+
+espaços <- BoardGames_Junto %>%
+  filter(name = 2) %>%
+  summarize(conta = sum(average > 7.5))
+print(espaços)
+
+
+#b) 
+exclamação <- sum(BoardGames_Junto$description %like% "!" & BoardGames_Junto$yearpublished > 2010)
+print(exclamação)
+
+#c)
+M12_M70 <- BoardGames_Junto %>%
+  filter(maxplayers == 12 & minplaytime > 70)
+
+sem_K <- M12_M70 %>%
+  filter(name %like% "k")
+
+#d) 
+Av_1996 <- BoardGames_Junto %>%
+  filter(yearpublished == 1996 & maxplaytime == 120) %>%
+  group_by(name) %>%
+  summarize(conta = sum(users_rated, na.rm = TRUE)) %>%
+  arrange(desc(conta)) %>%
+  slice(1)
+print(Av_1996)
+
+#e) 
+MCarac <- BoardGames_Junto %>%
+  filter(yearpublished == 1995 & maxplaytime == 120) %>%
+  group_by(name) %>%
+  summarize(conta = sum(users_rated, na.rm = TRUE)) %>%
+  arrange(desc(conta)) %>%
+  slice(1)
 
