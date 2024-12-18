@@ -70,7 +70,7 @@ espaços <- BoardGames_Junto %>%
   summarize(conta = sum(average > 7.5))
 print(espaços)
 
-
+ 
 #b) 
 exclamação <- sum(BoardGames_Junto$description %like% "!" & BoardGames_Junto$yearpublished > 2010)
 print(exclamação)
