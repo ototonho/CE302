@@ -177,14 +177,11 @@ print(exclamação)
 
 #c) Considere os jogos que admitem no máximo 12 jogadores(as) (maxplayers) e que possuem tempo mínimo de jogo (minplaytime) superior a 70. Dentre estes, quantos não contém a letra K no nome (name)?
   
-#  ```{r}
-#M12_M70 <- BoardGames_Junto %>%
-  # filter(maxplayers == 12 & minplaytime > 70)
+# erradaa
 
-#sem_K <- M12_M70 %>%
-#  filter(name %like% "k")
-#```
-
+sem_k <- BoardGames_Junto %>%
+  filter(maxplayers <= 12, minplaytime > 70, !str_detect(name, "[Kk]")) %>%
+  nrow()
 
 # d) Dentre os jogos lançados em 1996 (yearpublished), qual possui a maior quantidade de avaliações (users_rated)? Considere apenas os jogos cujo tempo máximo de jogo (maxplaytime) é 120 minutos.
 
