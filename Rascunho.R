@@ -81,3 +81,61 @@ DesV_Lim
 # 14.73
 # CERTA!
 
+#################################
+## questão 2
+
+
+Michelin_DF <- read.csv("C:/Breno/CE302/michelin.csv")
+
+  # a função que ela deu ta toda cagada, essa é a certa
+# d = 2*R*asin((sin^2*((φ2-φ1)/2)+cosφ1*cosφ2*sin^2*((λ2-λ1)/2))^(1/2))
+
+haversine_distance <- function(φ1,λ1,φ2,λ2) {
+  R <- 6371 # Raio da Terra em km
+  φ1 <- φ1 * pi / 180
+  λ1 <- λ1 * pi / 180
+  φ2 <- φ2 * pi / 180
+  λ2 <- λ2 * pi / 180
+  
+  # diferença entre lat e lon
+  dlat <- φ2 - φ1
+  dlon <- λ2 - λ1
+  
+  # distancia
+  a <- sin(dlat / 2)^2 + cos(φ1) * cos(φ2) * sin(dlon / 2)^2
+  d <- 2 * R * asin(sqrt(a))
+  return(d)
+  
+}
+
+
+# coords do per se
+
+per_se_coords <- Michelin_DF %>%
+  filter(Name == "Per Se") %>%
+  select(Latitude, Longitude) %>%
+  slice(1) %>%
+  as.numeric()
+
+# restaurantes 1 star
+
+one_star_rest <- Michelin_DF %>%
+  filter(str_detect(Award, "1 Star"))
+
+# add coluna com distancia calculada
+one_star_rest <- one_star_rest %>%
+mutate(D_do_PerSe = haversine_distance(
+  per_se_coords[1], per_se_coords[2], Latitude, Longitude
+))
+
+# rest mais proximo
+rest_prox <- one_star_rest %>%
+  slice_min(order_by = D_do_PerSe, n = 1)
+
+# mostrar resultado
+
+rest_prox %>%
+  select(Name, D_do_PerSe)
+
+## mari, 0.98 km
+## olhei no maps e a distancia ta certa pelo menos kk
