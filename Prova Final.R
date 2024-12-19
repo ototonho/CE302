@@ -129,4 +129,4 @@ feri_p_2017 <- global_holidays %>%
   select(contains(2017)) %>%
   summarize(conta = sum(ADM_name, na.rm = TRUE)) %>%
   arrange(desc(conta))
-feri_p_2017
+feri_p_2017 

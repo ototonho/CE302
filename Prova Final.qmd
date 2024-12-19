@@ -6,7 +6,7 @@ editor: visual
 
 ## Prova Final
 
-### Questão 1
+### Questão 1 
 
 Considere as notas dos instrumentos de uma orquestra descritas no vetor numérico nomeado em Notas e os instrumentos que atingiram o limite de volume descritos no vetor lógico nomeado em LimiteVolume:
 
@@ -18,16 +18,15 @@ Notas <- data.frame(Instrumento = c("Violino", "Viola", "Violoncelo", "Contrabai
                     Limite_Volume = c(FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE))
 ```
 
+a)  A raiz quadrada da média das notas dos instrumentos é:
 
-a) A raiz quadrada da média das notas dos instrumentos é:
+b)  A mediana das notas dos instrumentos que atingiram o limite de volume é:
 
-b) A mediana das notas dos instrumentos que atingiram o limite de volume é:
+c)  A maior nota entre os instrumentos que não atingiram o limite de volume é:
 
-c) A maior nota entre os instrumentos que não atingiram o limite de volume é:
+d)  Considerando que instrumentos com nota entre 40 e 69 precisam de ajustes, o número de instrumentos que precisam de ajustes e atingiram o limite de volume é:
 
-d) Considerando que instrumentos com nota entre 40 e 69 precisam de ajustes, o número de instrumentos que precisam de ajustes e atingiram o limite de volume é: 
-
-e) O desvio-padrão das notas dos instrumentos que atingiram o limite de volume é:
+e)  O desvio-padrão das notas dos instrumentos que atingiram o limite de volume é:
 
 ### Questão 2
 
@@ -45,11 +44,13 @@ em que r
 
 é o raio da Terra (aproximadamente 6,371 km). Neste contexto, responda as questões a seguir.
 
-    Dica: Implemente a função haversine_distance para calcular a distância entre dois pontos na superfície da Terra. Verifique a necessidade de converter as coordenadas de latitude e longitude para radianos.
+```         
+Dica: Implemente a função haversine_distance para calcular a distância entre dois pontos na superfície da Terra. Verifique a necessidade de converter as coordenadas de latitude e longitude para radianos.
 
-    Utilize o banco de dados michelin.csv para obter as informações necessárias.
+Utilize o banco de dados michelin.csv para obter as informações necessárias.
 
-    Quantos quilômetros o entusiasta precisa viajar para visitar o próximo restaurante com 1 Star ?
+Quantos quilômetros o entusiasta precisa viajar para visitar o próximo restaurante com 1 Star ?
+```
 
 ### Questão 3
 
@@ -57,16 +58,16 @@ Considere os bancos de dados BoardGames1 e BoardGames2 para responder as questõ
 
 Importante: Ao incluir respostas do tipo string, certifique-se de que a mesma corresponde exatamente ao que está contido nos bancos de dados. Caso contrário, o sistema vai considerar que sua resposta está incorreta.
 
-a) Dentre os jogos cujo nome (name) contém exatamente 2 palavras, quantos possuem nota média (average) maior que 7.5?
+a)  Dentre os jogos cujo nome (name) contém exatamente 2 palavras, quantos possuem nota média (average) maior que 7.5?
 
-b) Quantos jogos possuem o sinal de exclamação na descrição (description)? Considere apenas os jogos lançados após 2010 (yearpublished).
+b)  Quantos jogos possuem o sinal de exclamação na descrição (description)? Considere apenas os jogos lançados após 2010 (yearpublished).
 
 ```{r}
 exclamação <- sum(BoardGames_Junto$description %like% "!" & BoardGames_Junto$yearpublished > 2010)
 print(exclamação)
 ```
 
-c) Considere os jogos que admitem no máximo 12 jogadores(as) (maxplayers) e que possuem tempo mínimo de jogo (minplaytime) superior a 70. Dentre estes, quantos não contém a letra K no nome (name)?
+c)  Considere os jogos que admitem no máximo 12 jogadores(as) (maxplayers) e que possuem tempo mínimo de jogo (minplaytime) superior a 70. Dentre estes, quantos não contém a letra K no nome (name)?
 
 ```{r}
 M12_M70 <- BoardGames_Junto %>%
@@ -76,8 +77,7 @@ sem_K <- M12_M70 %>%
   filter(name %like% "k")
 ```
 
-
-d) Dentre os jogos lançados em 1996 (yearpublished), qual possui a maior quantidade de avaliações (users_rated)? Considere apenas os jogos cujo tempo máximo de jogo (maxplaytime) é 120 minutos.
+d)  Dentre os jogos lançados em 1996 (yearpublished), qual possui a maior quantidade de avaliações (users_rated)? Considere apenas os jogos cujo tempo máximo de jogo (maxplaytime) é 120 minutos.
 
 ```{r}
 Av_1996 <- BoardGames_Junto %>%
@@ -89,15 +89,13 @@ Av_1996 <- BoardGames_Junto %>%
 print(Av_1996)
 ```
 
-
-e) Dentre os jogos lançados em 1995 (yearpublished), qual possui a maior quantidade de caracteres na descrição (description)? Considere apenas os jogos cuja idade mínima para jogar (minage) é dada por um número par.
-
+e)  Dentre os jogos lançados em 1995 (yearpublished), qual possui a maior quantidade de caracteres na descrição (description)? Considere apenas os jogos cuja idade mínima para jogar (minage) é dada por um número par.
 
 ## Questão 4
 
 Feriados são épocas importantes tanto para confraternizações, descansos e para viagens. Diversos países celebram diferentes feriados e com isso, muitas pessoas aproveitam para viajar.
 
-Os dados contidos em tuesdata <- tidytuesdayR::tt_load('2024-12-24') contêm duas tabelas, uma com informações sobre feriados globais e outra sobre a quantidade de passageiros mensais em aeroportos.
+Os dados contidos em tuesdata \<- tidytuesdayR::tt_load('2024-12-24') contêm duas tabelas, uma com informações sobre feriados globais e outra sobre a quantidade de passageiros mensais em aeroportos.
 
 Nota: Caso não consiga abrir o pacote, busque no Google alternativas para fazer a leitura da base de dados, por exemplo, direto de uma url.
 
@@ -107,12 +105,12 @@ Acerca dos dados fornecidos, responda as seguintes questões:
 
 No ano de 2012 houveram quantos feriados no(a) país Hungary?
 
-a) Em qual mês do ano de 2014 houve mais feriados no(a) país Hungary?
+a)  Em qual mês do ano de 2014 houve mais feriados no(a) país Hungary?
 
-b) Quantos passageiros (Total) foram registrados no aeroporto do(a) país Uk no mês com maior número de feriados do ano de 2013?
+b)  Quantos passageiros (Total) foram registrados no aeroporto do(a) país Uk no mês com maior número de feriados do ano de 2013?
 
-c) Qual ano teve a maior média de passageiros do tipo International nos aeroportos do(a) país Switzerland?
+c)  Qual ano teve a maior média de passageiros do tipo International nos aeroportos do(a) país Switzerland?
 
-d) Qual país teve a maior quantidade de feriados públicos no ano de 2017?
+d)  Qual país teve a maior quantidade de feriados públicos no ano de 2017?
 
-e) Qual ano teve a maior quantidade de passageiros nos aeroportos do(a) país Lithuania?
+e)  Qual ano teve a maior quantidade de passageiros nos aeroportos do(a) país Lithuania?
